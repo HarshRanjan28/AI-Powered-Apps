@@ -10,7 +10,7 @@ function App() {
       .catch((error) => console.error("Error fetching message:", error));
   }, []);
 
-  return <p>{message}</p>;
+  return <p className="font-bold text-3xl p-4">{message}</p>;
 }
 
 export default App;
