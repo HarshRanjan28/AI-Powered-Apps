@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { Button } from "./components/ui/button";
+import { useState, useEffect } from 'react';
+import { Button } from './components/ui/button';
 
 function App() {
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
-    fetch("/api/greet")
+    fetch('/api/greet')
       .then((response) => response.json())
       .then((data) => setMessage(data.message))
-      .catch((error) => console.error("Error fetching message:", error));
+      .catch((error) => console.error('Error fetching message:', error));
   }, []);
 
   return (
