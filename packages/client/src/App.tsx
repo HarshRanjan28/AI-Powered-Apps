@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from './components/ui/button';
+import Chatbot from './components/Chatbot';
 
 function App() {
   const [message, setMessage] = useState<string>('');
@@ -13,8 +13,7 @@ function App() {
 
   return (
     <div className="p-4">
-      <p className="font-bold text-3xl">{message}</p>
-      <Button>Click me</Button>
+      <Chatbot />
     </div>
   );
 }
