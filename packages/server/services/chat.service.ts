@@ -1,4 +1,7 @@
 import { OpenRouter } from '@openrouter/sdk';
+import fs from 'fs';
+import path from 'path';
+import template from '../prompts/chatBot.txt';
 
 interface ChatResponse {
   id: string;
@@ -10,6 +13,12 @@ const openrouter = new OpenRouter({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const parkInfo = fs.readFileSync(
+  path.join(__dirname, '../prompts/WonderWorld.md'),
+  'utf-8'
+);
+const instructions = template.replace('{{parkInfo}}', parkInfo);
+
 //Public Interface
 export const chatService = {
   sendMessage: async (prompt: string): Promise<ChatResponse> => {
@@ -17,6 +26,10 @@ export const chatService = {
       chatRequest: {
         model: 'openrouter/free',
         messages: [
+          {
+            role: 'system',
+            content: instructions,
+          },
           {
             role: 'user',
             content: prompt,
