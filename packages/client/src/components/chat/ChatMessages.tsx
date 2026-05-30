@@ -8,14 +8,15 @@ export type Messages = {
 
 type Props = {
   messages: Messages[];
+  streamingText: string;
 };
 
-export function ChatMessages({ messages }: Props) {
+export function ChatMessages({ messages, streamingText }: Props) {
   const lastParagraphRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     lastParagraphRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, streamingText]);
 
   return (
     <div className="flex flex-col gap-3">
@@ -28,6 +29,12 @@ export function ChatMessages({ messages }: Props) {
           <ReactMarkdown>{msg.content}</ReactMarkdown>
         </div>
       ))}
+      {streamingText && (
+        <div className="message assistant streaming">
+          <ReactMarkdown>{streamingText}</ReactMarkdown>
+          <span className="blinking-cursor">|</span>
+        </div>
+      )}
     </div>
   );
 }
